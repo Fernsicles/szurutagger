@@ -13,8 +13,8 @@ model = dd.project.load_model_from_project("pretrained", compile_model = False)
 tags = dd.project.load_tags_from_project("pretrained")
 
 # API limits to 100 posts at a time if there is no limit, so keep trying until there are none left
-result = s.getPosts("-tag:bot_tagged,mod_confirmed", 0)
-while result["limit"] < result["total"]:
+result = s.getPosts("-tag:bot_tagged,mod_confirmed", 0, fields = "tags,version,id")
+while len(result["results"]) < result["total"]:
 	result = s.getPosts("-tag:bot_tagged,mod_confirmed", 0)
 	posts = result["results"]
 	for x in posts:

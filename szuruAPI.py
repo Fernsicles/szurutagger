@@ -4,11 +4,14 @@ import json
 config = json.load(open("config.json"))
 
 # Returns a search result resource as a python dict
-def getPosts(query = "", count = 0, offset = 0):
+def getPosts(query = "", count = 100, offset = 0, fields = ""):
 	if(count <= 0):
-		count = ""
+		count = "1"
 	url = config["url"] + "/api/posts/?offset=" + str(offset) + "&limit=" + str(count) + "&query=" + query
+	if(fields):
+		url += "&fields=" + fields
 	posts = requests.get(url, headers = {"Accept": "application/json"}, auth=requests.auth.HTTPBasicAuth(config["user"], config["password"]))
+	print(url)
 	return posts.json()
 
 # Takes in the post id as a number and the post update object as a dict
