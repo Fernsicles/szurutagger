@@ -18,10 +18,10 @@ def updatePost(id, post):
 	header = {"Accept": "application/json", "Content-Type": "application/json"}
 	return requests.put(url, headers = header, data = json.dumps(post), auth=requests.auth.HTTPBasicAuth(config["user"], config["password"]))
 
-def createComment(comment):
+def createComment(id, text):
 	url = config["url"] + "/api/comments/"
 	header = {"Accept": "application/json", "Content-Type": "application/json"}
-	return requests.post(url, headers = header, data = json.dumps(comment), auth=requests.auth.HTTPBasicAuth(config["user"], config["password"]))
+	return requests.post(url, headers = header, data = json.dumps({ "postId": id, "text": text }), auth=requests.auth.HTTPBasicAuth(config["user"], config["password"]))
 
 # Takes a post resource and returns the response
 def getThumbnail(post):
