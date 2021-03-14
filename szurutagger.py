@@ -1,0 +1,2 @@
+import deepdanbooru as dd
+
