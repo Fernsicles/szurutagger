@@ -24,10 +24,10 @@ while len(result["results"]) < result["total"]:
 				oldTags.append(tag)
 		thumb = s.getThumbnail(x).content
 		d = dd.commands.evaluate_image(io.BytesIO(thumb), model, tags, threshhold)
-		comment = time.asctime() + "\n"
+		comment = "```\n" + time.asctime() + "\n"
 		postUpdate = { "version": x["version"], "tags": oldTags }
 		for tup in d:
 			postUpdate["tags"].append(tup[0])
 			comment += f"({tup[1]:05.3f}) {tup[0]}\n"
 		s.updatePost(x["id"], postUpdate)
-		s.createComment(x["id"], comment)
+		s.createComment(x["id"], comment + "\n```")
