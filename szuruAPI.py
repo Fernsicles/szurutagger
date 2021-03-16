@@ -11,7 +11,6 @@ def getPosts(query = "", count = 100, offset = 0, fields = ""):
 	if(fields):
 		url += "&fields=" + fields
 	posts = requests.get(url, headers = {"Accept": "application/json"}, auth=requests.auth.HTTPBasicAuth(config["user"], config["password"]))
-	print(url)
 	return posts.json()
 
 # Takes in the post id as a number and the post update object as a dict
